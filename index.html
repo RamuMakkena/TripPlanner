@@ -4,51 +4,59 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trip Planner</title>
+    <title>Flying Pheonix</title>
     <link rel="stylesheet" href="./assets/styles/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 </head>
 <body>
-    <header>
-        <h1>Flying Pheonix</h1>
+    <header class="columns is-full is-centered">
+        <h1 class="is-size-1 has-text-weight-bold py-3 has-text-centered">Flying Pheonix</h1>
     </header>
 
-    <container>
-        <div id="start">
-            <h2>start location</h2>
+    <container class="columns">
+        <div class="column has-text-centered" id="start">
+            <h2 class="has-text-weight-bold">Start Location</h2>
+            <span>text entry</span>
         </div>
+        
 
-        <div id="end">
-            <h2>end location</h2>
+        <div class="column has-text-centered" id="end">
+            <h2 class="has-text-weight-bold">End Location</h2>
+            <span>text entry</span>
         </div>
+        <div class="column is-one-fifth"><button class="button is-success is-large">Submit</button></div>
+        
     </container>
     
 
-    <container>
+    <container class="columns is-center">
 
-        <div id="map">
-            <h2>Interactive Map</h2>
+        <div class="column" id="map">
+            <h2 class="is-size-3 has-text-centered">Interactive Map</h2>
 
         </div>
 
-        <div  id="weather">
-            <h2>Weather Forecast</h2>
+        <div class="column" id="weather">
+            <h2 class="is-size-3 has-text-centered">Weather Forecast</h2>
         </div>
 
     </container>
 
     <container id="recent-searches">
         <div id="">
-            <ul>
-                <li> recent-1</li>
-                <li> recent-2</li>
-                <li> recent-3</li>
+            <!-- if these will be dynamically generated using dom manipulation ul will have "columns" class-->
+            <ul class="columns py-5">
+                <!-- as well as the li's they will need a "column" class-->
+                <li class="column has-text-centered"> recent-1</li>
+                <li class="column has-text-centered"> recent-2</li>
+                <li class="column has-text-centered"> recent-3</li>
             </ul>
         </div>
 
     </container>
 
-    <footer>
-
+    <footer class="columns is-center">
+        <p class="column has-text-centered">© 2022 Team Pheonix, UT Coding Bootcamp</p>
     </footer>    
     
     
