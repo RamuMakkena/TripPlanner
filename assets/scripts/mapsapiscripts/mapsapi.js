@@ -1,3 +1,15 @@
+
+ 
+ var map;
+ function initMap() {
+   map = new google.maps.Map(document.getElementById('map'), {
+     center: {lat: 30.26759, lng: -97.74299},
+zoom: 13
+   });
+ }
+
+
+
 var test ="https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood&key=AIzaSyDM0RuEHkSrRzqb3IobHITR7T59jhtk4ZM"
 
 
