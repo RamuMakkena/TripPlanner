@@ -1,28 +1,28 @@
-var apiKey = "5df764fc78aa40c1b5f6775a91f20e6a";
-var weatherEl = document.querySelector("#weekWeather");
-var inputValue = document.querySelector("#endInputValue");
+var weatherEl = document.querySelector("#weather");
+var inputValue = document.querySelector("#endingLocation");
 var stateValue = document.querySelector("#endStateValue");
 var cityName;
 var stateCode;
+var DateTime = luxon.DateTime;
 
 // function for dates
-var dt = luxon.DateTime.now();
+var dt = DateTime.now();
 date = dt.toLocaleString({weekday: 'long', day: 'numeric'});
 
 // function to get the geolocation from the city input
- async function getCity(cityName, stateCode) {
+var getCity = function(calcDiffDates) {
     // geocoding API url with variables to accommodate whatever the user picks
-    var geoApi = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "," + stateCode + ",us&limit=1&appid=" + apiKey;
+    var geoApi = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + ",us&limit=1&appid=5df764fc78aa40c1b5f6775a91f20e6a";
     var geoLat;
     var geoLon;
     var geoName;
     var geoState;
 
     // gets the data from the url
-    var weatherInformation = await fetch(geoApi).then(function(response) {
+    fetch(geoApi).then(function(response) {
         // if the request from the url is successful
         if (response.ok) {
-            response.json().then(async function(data) {
+            response.json().then(function(data) {
                 // if user types in a city that doesn't exist
                 if (data.length === 0) {
                     alert("Unable to find city.")
@@ -33,31 +33,30 @@ date = dt.toLocaleString({weekday: 'long', day: 'numeric'});
                 geoLon = data[0].lon;
                 geoName = data[0].name;
                 geoState = data[0].state;
-                console.log("calling weather");
-                var response =  await getWeather(geoLat, geoLon, geoName, geoState);
-                return response;
+                getWeather(geoLat, geoLon, calcDiffDates);
             });
         }
     });
-    return weatherInformation;
-
- 
 };
 
 // get's the coordinates converted from city name from the geocoding api and gives it to the One Call api so that it can get the weather data
-async function getWeather(geoLat, geoLon, geoName, geoState) {
-    var oneCallApi = "https://api.openweathermap.org/data/2.5/onecall?lat=" + geoLat + "&lon=" + geoLon + "&exclude=current,minutely,hourly,alerts&units=imperial&appid=" + apiKey;
+var getWeather = function(geoLat, geoLon, calcDiffDates) {
+    var oneCallApi = "https://api.openweathermap.org/data/2.5/onecall?lat=" + geoLat + "&lon=" + geoLon + "&exclude=current,minutely,hourly,alerts&units=imperial&appid=5df764fc78aa40c1b5f6775a91f20e6a";
 
-    var weatherInfo = await fetch(oneCallApi).then(function(response) {
+    fetch(oneCallApi).then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
                 // clears weather data from previously searched ending city
-                
-                return JSON.stringify(data);
+                weatherEl.innerHTML = "";
+
+                // for loop to get the next seven days of data and passes it to the 'weekWeather' function
+                var i = calcDiffDates; 
+                var weatherDates = dt.plus({days: i}).toLocaleString({weekday: 'short', day: 'numeric'});
+                weekWeather(data.daily[i], weatherDates);    
+            
             });
         }
     });
-    return weatherInfo;
 };
 
 // creates weather cards with the appropriate data
@@ -100,9 +99,26 @@ var weekWeather = function(weekData, cardDates) {
 };
 
 // listens for click on the submit button to run functions
-$("#currSubmit").on("click", function(event) {
+$("#btn").on("click", function(event) {
     event.preventDefault();
     cityName = inputValue.value;
-    stateCode = stateValue.value;
-    getCity();
+    
+    // grabs the date from the calendar and gives it value
+    var dateValue = new Date($('#dateValue').val());
+    
+    // variable to convert the day selected from the calendar to lexon format
+    var lexonDateValue = DateTime.fromJSDate(dateValue).plus({days: 1}); // plus 1 for offset because the first day starts at 0
+
+    // variables to calculate the difference between the user selected date and the current date
+    var diffDates = lexonDateValue.diff(dt, 'days');
+    var calcDiffDates = Math.ceil(diffDates.values.days)
+    
+    // prevents user from selecting a date outside of the available weather forecast
+    if (calcDiffDates > 7) {
+        alert("Out of range"); // needs to be changed from alert box
+        return false;
+    }
+
+    getCity(calcDiffDates);
+    $("form").trigger("reset");
 });
