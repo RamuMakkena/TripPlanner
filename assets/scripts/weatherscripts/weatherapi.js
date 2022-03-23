@@ -1,8 +1,4 @@
-var weatherEl = document.querySelector("#weather");
-var inputValue = document.querySelector("#endingLocation");
-var stateValue = document.querySelector("#endStateValue");
-var cityName;
-var stateCode;
+var iconurl = "http://openweathermap.org/img/w/";
 var DateTime = luxon.DateTime;
 
 // function for dates
@@ -44,3 +40,7 @@ async function weatherForTheDay(geoLat, geoLon, travelDate) {
         
     }
 };
+
+function getIconUrl(iconvalue){
+    return iconurl+iconvalue+'.png';
+}
