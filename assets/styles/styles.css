@@ -2,3 +2,24 @@
     margin: 0;
     width: 100%;
 }
+
+.week-weather {
+    margin-top: 10px
+}
+
+.card {
+    background-color: #48c78e;
+    color: white;
+}
+
+.columns {
+    margin-top: 0;
+}
+
+.weather-disp {
+    display: inline;
+}
+
+.weather-icon {
+    max-width: 60%;
+}

@@ -1,9 +1,13 @@
 var apiKey = "5df764fc78aa40c1b5f6775a91f20e6a";
-var weekWeatherEl = document.querySelector("#weekWeather");
+var weatherEl = document.querySelector("#weekWeather");
+var inputValue = document.querySelector("#endInputValue");
+var stateValue = document.querySelector("#endStateValue");
 var cityName;
 var stateCode;
-var inputValue = document.querySelector("#inputValue");
-var stateValue = document.querySelector("#stateValue");
+
+// function for dates
+var dt = luxon.DateTime.now();
+date = dt.toLocaleString({weekday: 'long', day: 'numeric'});
 
 // function to get the geolocation from the city input
 var getCity = function() {
@@ -41,35 +45,69 @@ var getCity = function() {
     $("form").trigger("reset");
 };
 
+// get's the coordinates converted from city name from the geocoding api and gives it to the One Call api so that it can get the weather data
 var getWeather = function(geoLat, geoLon, geoName, geoState) {
     var oneCallApi = "https://api.openweathermap.org/data/2.5/onecall?lat=" + geoLat + "&lon=" + geoLon + "&exclude=current,minutely,hourly,alerts&units=imperial&appid=" + apiKey;
 
     fetch(oneCallApi).then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
-                for (var i = 0; i < 7; i++) {
-                    weekWeather(data.daily[i]);    
+                // clears weather data from previously searched ending city
+                weatherEl.innerHTML = "";
+
+                // for loop to get the next seven days of data and passes it to the 'weekWeather' function
+                for (var i = 0; i < 8; i++) {
+                    var weatherDates = dt.plus({days: i}).toLocaleString({weekday: 'short', day: 'numeric'});
+                    weekWeather(data.daily[i], weatherDates);    
                 }
             });
         }
     });
 };
 
+// creates weather cards with the appropriate data
+var weekWeather = function(weekData, cardDates) {
 
-var weekWeather = function(weekData) {
+    var iconUrl = "https://openweathermap.org/img/wn/" + weekData.weather[0].icon + "@2x.png";
 
+    // creates card to place the weather data
     var weatherCard = document.createElement("div");
-    weekWeatherEl.appendChild(weatherCard);
+    weatherCard.className = "card columns is-size-5";
+    weatherEl.appendChild(weatherCard);
 
-    var cardTemp = document.createElement("p");
-    cardTemp.innerHTML = "Temp: " + weekData.temp.day;
+    // creates header for each card for the date
+    var weatherDate = document.createElement("div");
+    weatherDate.innerHTML = cardDates;
+    weatherDate.className = "weather-disp column is-3 is-flex is-justify-content-center is-align-items-center";
+    weatherCard.appendChild(weatherDate);
+    
+    // gets the temperature and places it into the weather card
+    var cardTemp = document.createElement("div");
+    cardTemp.className = "weather-disp column is-3 is-flex is-align-items-center";
+    cardTemp.innerHTML = weekData.temp.max + "&deg/" + weekData.temp.min + "&deg";
     weatherCard.appendChild(cardTemp);
+
+    // places weather icon
+    var weatherIconHolder = document.createElement("div");
+    weatherIconHolder.className = "weather-disp column is-2";
+    weatherCard.appendChild(weatherIconHolder);
+
+    var weatherIcon = document.createElement("img");
+    weatherIcon.setAttribute("src", iconUrl);
+    weatherIcon.className = "weather-icon";
+    weatherIconHolder.appendChild(weatherIcon);
+
+    // creates weather description
+    var weatherDesc = document.createElement("div");
+    weatherDesc.innerHTML = weekData.weather[0].description.toUpperCase();
+    weatherDesc.className = "weather-disp column is-4 is-flex is-align-items-center";
+    weatherCard.appendChild(weatherDesc);
 };
 
+// listens for click on the submit button to run functions
 $("#currSubmit").on("click", function(event) {
     event.preventDefault();
     cityName = inputValue.value;
     stateCode = stateValue.value;
-    console.log(stateCode);
     getCity();
 });
