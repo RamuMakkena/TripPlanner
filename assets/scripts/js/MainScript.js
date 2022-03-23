@@ -3,8 +3,14 @@ $("#form").on('click','.button', function(){
     var startCity = $('#startLocation').text();
     var endCity = $('#endingLocation').text();
     var travelDate = $('#traveldate').text();
+    if((!startCity) || !(endCity) || !(travelDate)){
+        $('#errorpan').text("All options need to be present");
+        return false;
+    }else{
+        $('#errorpan').text("");
+    }
     console.log(startCity, endCity, travelDate); //2022-03-23
-    var displayWeather = getWeatherInformation(endCity, travelDate);
+     getWeatherInformation(endCity, travelDate);
 });
 
 $('#startLocation').on('change', function(){

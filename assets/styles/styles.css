@@ -4,3 +4,7 @@
     width: 100%;
 }
 
+.errormessage{
+    font-size: medium;
+    color: red;
+}
