@@ -9,12 +9,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 </head>
 <body>
-    <header class="columns is-full is-centered">
-        <h1 class="is-size-1 has-text-weight-bold py-3 has-text-centered">Flying Pheonix</h1>
-    </header>
+    <container class="columns is-0 is-full is-centered">
+        <h1 class="column is-size-1 has-text-weight-bold has-text-centered">Flying Pheonix</h1>
+    
+    </container>
 
-    <form class="columns" id="form">
-
+    <container class="columns is-centered" id="form">
+        
         <div class="column has-text-centered" id="start">
             <h2 class="has-text-weight-bold">Starting Location</h2>
             <input placeholder="Starting Location" id="startLocation">
@@ -26,38 +27,39 @@
             <input placeholder="Ending Location" id="endingLocation">
         </div>
 
+        <div class="column has-text-centered" id="date">
+            <h2 class="has-text-weight-bold">Date</h2>
+            <input type="date" id="date">
+        </div>
+
         <div class="column is-one-fifth">
             <button  id="btn" class="button is-success is-large">Submit</button>
         </div>
         
-    </form>
-    
+    </container>
 
-    <section class="columns is-center">
+    <container class="columns is-center">
 
-        <div class="column" id="map">
+        <div class="column">
             <h2 class="is-size-3 has-text-centered">Interactive Map</h2>
-
+            <div class="column" id="map"></div>
         </div>
 
-        <div class="column" id="weather">
+        <div class="column">
             <h2 class="is-size-3 has-text-centered">Weather Forecast</h2>
+            <div class="column" id="weather"></div>
         </div>
 
-    </section>
+    </container>
 
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoyvGFJuUf5iXuMxairHLkdcGAvTkGAjE&callback=initMap"
-    async defer></script>
-
-    <script src="mapsapi.js"></script>
-
-
-
-    <footer class="columns is-center">
+    <container class="columns is-center">
         <p class="column has-text-centered">© 2022 Team Pheonix, UT Coding Bootcamp</p>
-    </footer>    
+    </container>    
     
-    
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoyvGFJuUf5iXuMxairHLkdcGAvTkGAjE&callback=initMap"
+    async defer></script>
+    <script src="mapsapi.js"></script>
 </body>
 </html>
