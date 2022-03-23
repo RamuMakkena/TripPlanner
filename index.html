@@ -1,64 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flying Pheonix</title>
-    <link rel="stylesheet" href="./assets/styles/styles.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-</head>
-<body>
-    <container class="columns is-0 is-full is-centered">
-        <h1 class="column is-size-1 has-text-weight-bold has-text-centered">Flying Pheonix</h1>
-    </container>
-
-    <container class="columns is-centered" id="form">
+<html>
+  <head>
+    <title>Directions Service</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <div id="floating-panel">
+      <b>Start: </b>
+      <select id="start">
         
-        <div class="column has-text-centered" id="start">
-            <h2 class="has-text-weight-bold">Starting Location</h2>
-            <input placeholder="Starting Location" id="startLocation">
-        </div>
-        
+        <option value="chicago, il">Chicago</option>
+        <option value="st louis, mo">St Louis</option>
+        <option value="joplin, mo">Joplin, MO</option>
+        <option value="oklahoma city, ok">Oklahoma City</option>
+        <option value="amarillo, tx">Amarillo</option>
+        <option value="gallup, nm">Gallup, NM</option>
+        <option value="flagstaff, az">Flagstaff, AZ</option>
+        <option value="winona, az">Winona</option>
+        <option value="kingman, az">Kingman</option>
+        <option value="barstow, ca">Barstow</option>
+        <option value="san bernardino, ca">San Bernardino</option>
+        <option value="los angeles, ca">Los Angeles</option>
+      </select>
+      <b>End: </b>
+      <select id="end">
+        <option value="chicago, il">Chicago</option>
+        <option value="st louis, mo">St Louis</option>
+        <option value="joplin, mo">Joplin, MO</option>
+        <option value="oklahoma city, ok">Oklahoma City</option>
+        <option value="amarillo, tx">Amarillo</option>
+        <option value="gallup, nm">Gallup, NM</option>
+        <option value="flagstaff, az">Flagstaff, AZ</option>
+        <option value="winona, az">Winona</option>
+        <option value="kingman, az">Kingman</option>
+        <option value="barstow, ca">Barstow</option>
+        <option value="san bernardino, ca">San Bernardino</option>
+        <option value="los angeles, ca">Los Angeles</option>
+      </select>
+    </div>
+    <div id="map"></div>
 
-        <div class="column has-text-centered" id="end">
-            <h2 class="has-text-weight-bold">Ending Location</h2>
-            <input placeholder="Ending Location" id="endingLocation">
-        </div>
-
-        <div class="column has-text-centered" id="date">
-            <h2 class="has-text-weight-bold">Date</h2>
-            <input type="date" id="date">
-        </div>
-
-        <div class="column is-one-fifth">
-            <button  id="btn" class="button is-success is-large">Submit</button>
-        </div>
-        
-    </container>
-
-    
-    
-
-    <container class="columns is-center">
-
-        <div class="column">
-            <h2 class="is-size-3 has-text-centered">Interactive Map</h2>
-            <div class="column" id="map"></div>
-        </div>
-
-        <div class="column">
-            <h2 class="is-size-3 has-text-centered">Weather Forecast</h2>
-            <div class="column" id="weather"></div>
-        </div>
-
-    </container>
-
-
-    <container class="columns is-center">
-        <p class="column has-text-centered">© 2022 Team Pheonix, UT Coding Bootcamp</p>
-    </container>    
-    
-    
-</body>
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDM0RuEHkSrRzqb3IobHITR7T59jhtk4ZM&callback=initMap&v=weekly"
+      async defer
+    ></script>
+  </body>
 </html>
