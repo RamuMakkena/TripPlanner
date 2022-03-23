@@ -29,5 +29,29 @@ async function getWeatherInformation(endCity, travelDate){
 
     console.log(JSON.stringify(weatherInformationForGivendate));
 
+    var sunrise = weatherInformationForGivendate.sunrise;
+    var sunset = weatherInformationForGivendate.sunset;
+    var temp = weatherInformationForGivendate.temp;
+    console.log(JSON.stringify(temp));
+    var dayTemp = temp['day'];
+    var eveTemp = temp.eve;
+    var nightTemp = temp.night;
+    var morningTemp = temp.morn;
+    var minTemp = temp.min;
+    var maxTemp = temp.max;
+
+    var feelsLike = weatherInformationForGivendate.feelsLike;
+    var humidity = weatherInformationForGivendate.humidity;
+    var windSpeed = weatherInformationForGivendate.wind_speed;
+    var rainPercent = weatherInformationForGivendate.rain;
+    var weather = weatherInformationForGivendate.weather[0];
+    var mainWeather = weather.main;
+    var desc = weather.description;
+    var icon = getIconUrl(weather.icon);
+    var uvi = weatherInformationForGivendate.uvi;
+
+    $('#weather').text(desc);
+    $('#weather').append(icon);
+
     //calling weather API to get weather for a date
 }
