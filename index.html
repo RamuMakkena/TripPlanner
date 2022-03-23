@@ -13,28 +13,30 @@
         <h1 class="is-size-1 has-text-weight-bold py-3 has-text-centered">Flying Pheonix</h1>
     </header>
 
-    <container class="columns">
+    <form class="columns" id="form">
+
         <div class="column has-text-centered" id="start">
-            <h2 class="has-text-weight-bold">Start Location</h2>
-            <span>text entry</span>
+            <h2 class="has-text-weight-bold">Starting Location</h2>
+            <input placeholder="Starting Location" id="startLocation">
         </div>
         
 
         <div class="column has-text-centered" id="end">
-            <h2 class="has-text-weight-bold">End Location</h2>
-            <span>text entry</span>
+            <h2 class="has-text-weight-bold">Ending Location</h2>
+            <input placeholder="Ending Location" id="endingLocation">
         </div>
-        <div class="column is-one-fifth"><button class="button is-success is-large">Submit</button></div>
+
+        <div class="column is-one-fifth">
+            <button  id="btn" class="button is-success is-large">Submit</button>
+        </div>
         
-    </container>
+    </form>
     
 
-    <container class="columns is-center">
+    <section class="columns is-center">
 
         <div class="column" id="map">
             <h2 class="is-size-3 has-text-centered">Interactive Map</h2>
-            
-
 
         </div>
 
@@ -42,37 +44,15 @@
             <h2 class="is-size-3 has-text-centered">Weather Forecast</h2>
         </div>
 
-    </container>
-
-    <container id="recent-searches">
-        <div id="">
-            <!-- if these will be dynamically generated using dom manipulation ul will have "columns" class-->
-            <ul class="columns py-5">
-                <!-- as well as the li's they will need a "column" class-->
-                <li class="column has-text-centered"> recent-1</li>
-                <li class="column has-text-centered"> recent-2</li>
-                <li class="column has-text-centered"> recent-3</li>
-            </ul>
-        </div>
-        
-        <div id="map"></div>
-    
+    </section>
 
 
-    <script>
-      var map;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 30.26759, lng: -97.74299},
-    zoom: 11
-        });
-      }
-
-    </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoyvGFJuUf5iXuMxairHLkdcGAvTkGAjE&callback=initMap"
     async defer></script>
 
-    </container>
+    <script src="mapsapi.js"></script>
+
+
 
     <footer class="columns is-center">
         <p class="column has-text-centered">© 2022 Team Pheonix, UT Coding Bootcamp</p>
