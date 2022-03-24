@@ -8,3 +8,12 @@
     font-size: medium;
     color: red;
 }
+
+.popularPlacesList{
+    background-color: bisque;
+    list-style: none;
+}
+.popularPlace {
+    color: brown;
+
+}

@@ -41,21 +41,23 @@
         </div>
     </container>
 
-    
-    
-
     <container class="columns is-center">
-
         <div class="column">
             <h2 class="is-size-3 has-text-centered">Interactive Map</h2>
             <div class="column" id="map"></div>
         </div>
-
         <div class="column">
             <h2 class="is-size-3 has-text-centered">Weather Forecast</h2>
-            <div class="column" id="weather"></div>
+            <div class="column" id="weather">  
+            </div>
         </div>
 
+    </container>
+    <container class="columns is-center">
+        <h2 class="is-size-3 has-text-centered">Popular places at destination</h2>
+        <div class="column" id="popularPlaces">
+
+        </div>
     </container>
 
 
@@ -72,6 +74,7 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDM0RuEHkSrRzqb3IobHITR7T59jhtk4ZM&callback=initMap&v=weekly"
     async defer
   ></script>
+  <script src="./assets/scripts/attrtactions/tourismapi.js"></script>
     <script src="./assets/scripts/js/MainScript.js"></script>
 </body>
 </html>
