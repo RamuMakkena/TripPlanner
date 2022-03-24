@@ -13,14 +13,12 @@ date = dt.toLocaleString({weekday: 'long', day: 'numeric'});
     var response = await fetch(geoApi)
             .then((response) => { return response.json();})
             .catch(err => console.error(err));
-            // console.log("returnin GEO data : "+JSON.stringify(response));
     return response;
 
 };
 
 // get's the coordinates converted from city name from the geocoding api and gives it to the One Call api so that it can get the weather data
 async function getWeather(geoLat, geoLon) {
-    // console.log('executing weather API');
     var oneCallApi = "https://api.openweathermap.org/data/2.5/onecall?lat=" + geoLat + "&lon=" + geoLon + "&exclude=current,minutely,hourly,alerts&units=imperial&appid=5df764fc78aa40c1b5f6775a91f20e6a";
     var weatherResponse = await fetch(oneCallApi)
             .then((response) =>{return response.json();})

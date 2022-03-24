@@ -3,6 +3,13 @@ var tripsSearched = JSON.parse(localStorage.getItem("phoenix-trips"));
 var currentDate = (DateTime.now()).toFormat('yyyy-LL-dd');
 getWeatherInformation("Austin", currentDate);
 
+$('#traveldate').datepicker({
+    dateFormat:"yy-mm-dd",
+    minDate: 0,
+    maxDate: 5
+  });
+
+
 if(tripsSearched){
     updatePreviousTrips(tripsSearched);
 }
@@ -14,12 +21,22 @@ $("#form").on('click','.button', function(){
     var startCity = $('#startLocation').text();
     var endCity = $('#endingLocation').text();
     var travelDate = $('#traveldate').text();
-    if((!startCity) || !(endCity) || !(travelDate)){
-        $('#errorpan').text("All options need to be present");
+    console.log(travelDate);
+    if(!startCity){
+        $('#errorpan').text("");
+        $('#errorpan').text("Starting Location should not be empty");
         return false;
-    }else{
+    } else if(!endCity ){
+        $('#errorpan').text("");
+        $('#errorpan').text("Ending Location City should not be empty");
+        return false;
+    }else if(!travelDate){
+        travelDate = (DateTime.now()).toFormat('yyyy-LL-dd');
+    }
+    else{
         $('#errorpan').text("");
     }
+
     $('#weatherCard').html('');
      getWeatherInformation(endCity, travelDate);
      updateLocalStorage(startCity, endCity);
@@ -40,7 +57,7 @@ $('#traveldate').on('change', function(){
 async function getWeatherInformation(endCity, travelDate){
     var geoCoordinates= await getCity(endCity);
     if(!geoCoordinates[0]){
-        $('#errorpan').text("We are experiencing some network issues, some information on page might not be displayed");
+        $('#errorpan').text("We are not able to identify the cities entered, please try again ");
         return false;
     }
     var lon = geoCoordinates[0].lon;
@@ -174,6 +191,7 @@ function updateLocalStorage(startCity, endCity){
     }
     tripsSearched.push(tripObject);
     localStorage.setItem("phoenix-trips",JSON.stringify(tripsSearched));
+    updatePreviousTrips(tripsSearched);
 }
 
 
@@ -188,4 +206,13 @@ function updatePreviousTrips(tripsSearched){
     $('#previousTrips').html(""); //removing existing data;
     $('#previousTrips').append(h2Elemet); 
     $('#previousTrips').append(previousTripsList);
+}
+
+
+
+function getMinDate(){
+    return("2022-03-22");
+}
+function getMaxDate(){
+    return("2022-03-27");
 }

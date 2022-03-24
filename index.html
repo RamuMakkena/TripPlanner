@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flying Pheonix</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="styleSheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css"/>
     <link rel="stylesheet" href="./assets/styles/weather-card.css">
     <link rel="stylesheet" href="./assets/styles/styles.css">
     <link rel="stylesheet" href="./assets/styles/style.css">
@@ -31,7 +32,7 @@
 
         <div class="column has-text-centered form-group" id="date">
             <h2 class="has-text-weight-bold">Date</h2>
-            <input type="date" id="traveldate">
+            <input type="text" id="traveldate" placeholder="yyyy-mm-dd" autocomplete="off"/>
         </div>
 
         <div class="column is-one-fifth form-group">
@@ -82,7 +83,9 @@
     </container>    
     
 <!-- All The required scripts -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/luxon@2.3.1/build/global/luxon.min.js"></script>
     <script src="./assets/scripts/weatherscripts/weatherapi.js"></script>
     <script src="./assets/scripts/mapsapiscripts/mapsapi.js"></script>
