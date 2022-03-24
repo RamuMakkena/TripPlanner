@@ -1,0 +1,28 @@
+#weather {
+    height: 600px;
+    width: 600px;
+}
+
+.card {
+    background-color: #48c78e;
+    color: white;
+    margin-left: 0;
+}
+
+.card-header {
+    margin-left: 0;
+    background-color: black;
+}
+
+.card-cont {
+    margin-left: 0;
+}
+
+.temp {
+    margin-top: 10px;
+}
+
+.weather-icon {
+    max-width: 180px;
+    min-width: 150px;
+}
