@@ -1,0 +1,42 @@
+.weather-column {
+    max-width: 706.5px;
+}
+
+.center-weather {
+    min-height: 396px;
+    min-width: 211px;
+}
+
+.card {
+    background-color: #48c78e;
+    color: white;
+    margin-left: 0;
+    padding: 0;
+    min-width: 535px;
+}
+
+.card-header {
+    margin-left: 0;
+    background-color: black;
+}
+
+.card-cont {
+    margin-left: 0;
+}
+
+.center-weather {
+    margin-left: 0;
+    position: relative;
+    left: -22px;
+    top: -10px;
+    padding: 0;
+}
+
+.temp {
+    margin-top: 8px;
+}
+
+.weather-icon {
+    max-width: 180px;
+    min-width: 150px;
+}

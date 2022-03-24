@@ -4,9 +4,95 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trip Planner</title>
+    <title>Flying Pheonix</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="styleSheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css"/>
+    <link rel="stylesheet" href="./assets/styles/weather-card.css">
+    <link rel="stylesheet" href="./assets/styles/styles.css">
 </head>
 <body>
+    <container class="columns is-0 is-full is-centered">
+        <h1 class="column is-size-1 has-text-weight-bold has-text-centered">Flying Pheonix</h1>
+    </container>
+
+    <container class="columns is-centered search-bar" id="form">
+
+        
+        <div class="column has-text-centered form-group" id="start">
+            <h2 class="has-text-weight-bold">Starting Location</h2>
+            <input placeholder="Starting Location" id="startLocation">
+        </div>
+        
+
+        <div class="column has-text-centered form-group" id="end">
+            <h2 class="has-text-weight-bold">Ending Location</h2>
+            <input placeholder="Ending Location" id="endingLocation">
+        </div>
+
+        <div class="column has-text-centered form-group" id="date">
+            <h2 class="has-text-weight-bold">Date</h2>
+            <input type="text" id="traveldate" placeholder="yyyy-mm-dd" autocomplete="off"/>
+        </div>
+
+        <div class="column is-one-fifth form-group">
+            <button  id="btn" class="button is-success is-large">Submit</button>
+        </div>
+        
+    </container>
+
+    <container class="columns is-center">
+        <div id="errorpan" class="column errormessage has-text-centered">
+            
+        </div>
+    </container>
+
+    <container class="columns is-center">
+        <div class="column">
+            <h2 class="is-size-3 has-text-centered">Map Overview</h2>
+            <div class="column is-center" id="map"></div>
+            <div class="has-text-centered" id="summary">
+                <h3 id="summaryText"></h3>
+            </div>
+        </div>
+        <div class="column">
+            <h2 class="is-size-3 has-text-centered">Weather Forecast</h2>
+            <div class="weather-column column" id="weather">
+                <div id="weatherCard"></div>
+            </div>
+        </div>
+
+    </container>
+
+   
+
+    <container class="columns is-center">
+        <div class="column has-text-centered has-text-weight-bold" id="popularPlaces">
+
+        </div>
+    </container>
+
+    <container class="columns is-center">
+        <div class="column has-text-centered has-text-weight-bold" id="previousTrips">
+
+        </div>
+    </container>
+
+    <container class="columns is-center">
+        <p class="column has-text-centered">© 2022 Team Pheonix, UT Coding Bootcamp</p>
+    </container>    
     
+<!-- All The required scripts -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@2.3.1/build/global/luxon.min.js"></script>
+    <script src="./assets/scripts/weatherscripts/weatherapi.js"></script>
+    <script src="./assets/scripts/mapsapiscripts/mapsapi.js"></script>
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDM0RuEHkSrRzqb3IobHITR7T59jhtk4ZM&callback=initMap&v=weekly"
+    async defer
+  ></script>
+  <script src="./assets/scripts/attrtactions/tourismapi.js"></script>
+    <script src="./assets/scripts/js/MainScript.js"></script>
 </body>
 </html>

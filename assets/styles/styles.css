@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    width: 100%;
+}
+
+.columns {
+    margin-left: 0;
+}
+
+.errormessage{
+    font-size: medium;
+    color: red;
+}
+
+.popularPlacesList{
+    background-color: bisque;
+    list-style: none;
+}
+.popularPlace {
+    color: brown;
+
+    
+}
+.previousTrips{
+    background-color: bisque;
+    list-style: none;
+}
+.previousTrip {
+    color: brown;
+}
+
+#map {
+    margin: 15px;
+    display: flex;
+    height: 444px
+  }
