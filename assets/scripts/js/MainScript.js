@@ -10,7 +10,7 @@ $("#form").on('click','.button', function(){
         $('#errorpan').text("");
     }
     // console.log(startCity, endCity, travelDate); //2022-03-23
-     getWeatherInformation(endCity, travelDate);
+     getWeatherInformation(startCity, endCity, travelDate);
 });
 
 $('#startLocation').on('change', function(){
@@ -25,9 +25,12 @@ $('#traveldate').on('change', function(){
     $('#traveldate').text($(this).val());
 })
 
-async function getWeatherInformation(endCity, travelDate){
+async function getWeatherInformation(startCity, endCity, travelDate){
     var geoCoordinates= await getCity(endCity);
-    
+    if(!geoCoordinates[0]){
+        $('#errorpan').text("We are experiencing some network issues, some information on page might not be displayed");
+        return false;
+    }
     var lon = geoCoordinates[0].lon;
     var lat = geoCoordinates[0].lat;
     var city = geoCoordinates[0].name;
@@ -58,7 +61,8 @@ var response = await getTourismPlaces(longitutude, lattitude);
     }
 
    var h2Elemet = $("<h2 class='is-size-3 has-text-centered'>Popular places at destination</h2>");
-   $('#pipularPlaces').append(h2Elemet); 
+   $('#popularPlaces').html(""); //removing existing data;
+   $('#popularPlaces').append(h2Elemet); 
    $('#popularPlaces').append(placesList);
 
 

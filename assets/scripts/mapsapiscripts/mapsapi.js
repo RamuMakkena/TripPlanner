@@ -7,11 +7,7 @@ function initMap() {
     center: { lat: 30.266666, lng: -97.733330 },
     disableDefaultUI:true,
   });
-
   directionsRenderer.setMap(map);
-  // directionsRenderer.setPanel(document.getElementById("sidebar"));
-  // map.controls[google.map.ControlPosition.TOPCENTER].push(control);
-
   const onChangeHandler = function () {
     calculateAndDisplayRoute(directionsService, directionsRenderer);
   };
@@ -34,10 +30,9 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
     .then((response) => {
       var distance = response.routes[0].legs[0].distance.text;
       var duration = response.routes[0].legs[0].duration.text;
-      var summaryEl = document.getElementById('summary');
-      var h3El = document.createElement('h3');
+      var h3El = document.getElementById('summaryText');
+     
       h3El.textContent = 'Duration: '+duration+'  Distance: '+distance;
-      summaryEl.appendChild(h3El);
       directionsRenderer.setDirections(response);
     })
     .catch((e) => console.error("Directions request failed due to " + status));
