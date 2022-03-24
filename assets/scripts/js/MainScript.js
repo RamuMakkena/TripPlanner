@@ -1,5 +1,14 @@
 var weatherEl = document.querySelector("#weather");
+var tripsSearched = JSON.parse(localStorage.getItem("phoenix-trips"));
+var currentDate = (DateTime.now()).toFormat('yyyy-LL-dd');
+getWeatherInformation("Austin", currentDate);
 
+if(tripsSearched){
+    updatePreviousTrips(tripsSearched);
+}
+else{
+    tripsSearched = [];
+}
 // Read Form data
 $("#form").on('click','.button', function(){
     var startCity = $('#startLocation').text();
@@ -11,7 +20,9 @@ $("#form").on('click','.button', function(){
     }else{
         $('#errorpan').text("");
     }
-     getWeatherInformation(startCity, endCity, travelDate);
+    $('#weatherCard').html('');
+     getWeatherInformation(endCity, travelDate);
+     updateLocalStorage(startCity, endCity);
 });
 
 $('#startLocation').on('change', function(){
@@ -26,7 +37,7 @@ $('#traveldate').on('change', function(){
     $('#traveldate').text($(this).val());
 })
 
-async function getWeatherInformation(startCity, endCity, travelDate){
+async function getWeatherInformation(endCity, travelDate){
     var geoCoordinates= await getCity(endCity);
     if(!geoCoordinates[0]){
         $('#errorpan').text("We are experiencing some network issues, some information on page might not be displayed");
@@ -36,7 +47,7 @@ async function getWeatherInformation(startCity, endCity, travelDate){
     var lat = geoCoordinates[0].lat;
     var city = geoCoordinates[0].name;
     var state = geoCoordinates[0].state;
-    updateAttractions(lon, lat);
+    updateAttractions(endCity, lon, lat);
     var weatherInformationForGivendate = await weatherForTheDay(lat,lon, travelDate);
     var temp = weatherInformationForGivendate.temp;
     var minTemp = temp.min;
@@ -46,7 +57,6 @@ async function getWeatherInformation(startCity, endCity, travelDate){
     var windSpeed = weatherInformationForGivendate.wind_speed;
     var rainPercent = weatherInformationForGivendate.rain;
     var weather = weatherInformationForGivendate.weather[0];
-    var mainWeather = weather.main;
     var desc = weather.description;
     var icon = getIconUrl(weather.icon);
     var uvi = weatherInformationForGivendate.uvi;
@@ -56,9 +66,8 @@ async function getWeatherInformation(startCity, endCity, travelDate){
     var iconImage = $("<img src='" + icon + "'class='weather-icon' width='50' height='50'>");
     
     // creates a card to place the weather data
-    var weatherCard = document.createElement("div");
+    var weatherCard = document.getElementById('weatherCard');
     weatherCard.className = "card";
-    weatherEl.appendChild(weatherCard);
     
     // creates header to place city and date
     var weatherNameAndDate = document.createElement("div");
@@ -130,29 +139,53 @@ async function getWeatherInformation(startCity, endCity, travelDate){
 }
 
 
-async function updateAttractions(longitutude, lattitude){
+async function updateAttractions(endCity, longitutude, lattitude){
 
 var response = await getTourismPlaces(longitutude, lattitude);
     var destinationFeatues = response.features;
-    var filteredPlaces = [];
     var placesList = $("<ul>").addClass("popularPlacesList");
     for(var i=0; i<destinationFeatues.length; i++){
         var placeName = destinationFeatues[i].properties.name;
         var wikiLinkID =  destinationFeatues[i].properties.wikidata;
-       var placeObject = {
-           "place" : placeName,
-           "ID" : wikiLinkID
-       }
-       filteredPlaces.push(placeObject);
        var listElement = $('<li>').addClass('popularPlace');
         listElement.html("<a href='https://www.wikidata.org/wiki/"+wikiLinkID+"' alt='"+placeName+"'>"+placeName+"</a>");
         placesList.append(listElement);
     }
 
-   var h2Elemet = $("<h2 class='is-size-3 has-text-centered'>Popular places at destination</h2>");
+   var h2Elemet = $("<h2 class='is-size-3 has-text-centered'>Popular places around "+endCity+" </h2>");
    $('#popularPlaces').html(""); //removing existing data;
    $('#popularPlaces').append(h2Elemet); 
    $('#popularPlaces').append(placesList);
 
 
+}
+
+
+function updateLocalStorage(startCity, endCity){
+
+    tripsSearched.forEach(trip => {
+        if(trip.startCity == startCity && trip.destinationCity == endCity){
+            return true;
+        }
+    });
+    var tripObject = {
+        "startCity" : startCity,
+        "destinationCity" : endCity
+    }
+    tripsSearched.push(tripObject);
+    localStorage.setItem("phoenix-trips",JSON.stringify(tripsSearched));
+}
+
+
+function updatePreviousTrips(tripsSearched){
+    var previousTripsList = $("<ul>").addClass("previousTrips");
+    var h2Elemet = $('<h2>').text("Previous searched trips");
+    tripsSearched.forEach(trip => {
+        var tripElement = $('<li>').addClass('previousTrip');
+        tripElement.text(trip.startCity+" - "+trip.destinationCity);
+        previousTripsList.append(tripElement);
+    });
+    $('#previousTrips').html(""); //removing existing data;
+    $('#previousTrips').append(h2Elemet); 
+    $('#previousTrips').append(previousTripsList);
 }
