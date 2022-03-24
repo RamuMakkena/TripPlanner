@@ -1,7 +1,10 @@
 * {
     margin: 0;
-    margin-left: 0.75rem;
     width: 100%;
+}
+
+.columns {
+    margin-left: 0;
 }
 
 .errormessage{
