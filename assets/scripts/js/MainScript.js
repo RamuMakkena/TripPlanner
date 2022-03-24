@@ -80,11 +80,11 @@ async function getWeatherInformation(endCity, travelDate){
 
 
     // Below is everything that creates the weather forecast
-    var iconImage = $("<img src='" + icon + "'class='weather-icon' width='50' height='50'>");
+    var iconImage = $("<img src='" + icon + "'class='weather-icon' width='40' height='40'>");
     
     // creates a card to place the weather data
     var weatherCard = document.getElementById('weatherCard');
-    weatherCard.className = "card";
+    weatherCard.className = "card column";
     
     // creates header to place city and date
     var weatherNameAndDate = document.createElement("div");

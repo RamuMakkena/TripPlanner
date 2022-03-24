@@ -1,9 +1,10 @@
 .weather-column {
-    max-width: 706.5px;
+    display: flex;
+    height: 400px;
 }
 
 .center-weather {
-    min-height: 396px;
+    min-height: 375px;
     min-width: 211px;
 }
 
@@ -12,7 +13,7 @@
     color: white;
     margin-left: 0;
     padding: 0;
-    min-width: 535px;
+    min-width: 300px;
 }
 
 .card-header {
@@ -27,7 +28,6 @@
 .center-weather {
     margin-left: 0;
     position: relative;
-    left: -22px;
     top: -10px;
     padding: 0;
 }
@@ -38,5 +38,5 @@
 
 .weather-icon {
     max-width: 180px;
-    min-width: 150px;
+    min-width: 125px;
 }
