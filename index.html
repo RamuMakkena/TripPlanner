@@ -15,6 +15,7 @@
         <h1 class="column is-size-1 has-text-weight-bold has-text-centered">Flying Pheonix</h1>
     </container>
 
+    <!-- Search Bar Container -->
     <container class="columns is-centered search-bar" id="form">
 
         
@@ -40,48 +41,55 @@
         
     </container>
 
+    <!-- Error container if fields are not filled correctly -->
     <container class="columns is-center">
         <div id="errorpan" class="column errormessage has-text-centered">
             
         </div>
     </container>
 
+    <!-- Container for trip summary -->
+    <container class="columns">
+        <div class="has-text-centered" id="summary">
+            <h3 id="summaryText"></h3>
+        </div>
+    </container>
+
+    <!-- Map and Weather Container -->
     <container class="columns is-center">
         <div class="column">
             <h2 class="is-size-3 has-text-centered">Map Overview</h2>
             <div class="column is-center" id="map"></div>
-            <div class="has-text-centered" id="summary">
-                <h3 id="summaryText"></h3>
-            </div>
         </div>
         <div class="column">
             <h2 class="is-size-3 has-text-centered">Weather Forecast</h2>
-            <div class="weather-column column" id="weather">
-                <div id="weatherCard"></div>
+            <div class="column is-center" id="weather">
+                <div class="column" id="weatherCard"></div>
             </div>
         </div>
 
     </container>
 
-   
-
+    <!-- Popular places container -->
     <container class="columns is-center">
         <div class="column has-text-centered has-text-weight-bold" id="popularPlaces">
 
         </div>
     </container>
 
+    <!-- Previous Searches -->
     <container class="columns is-center">
         <div class="column has-text-centered has-text-weight-bold" id="previousTrips">
 
         </div>
     </container>
 
+    <!-- Footer Container -->
     <container class="columns is-center">
         <p class="column has-text-centered">© 2022 Team Pheonix, UT Coding Bootcamp</p>
     </container>    
     
-<!-- All The required scripts -->
+    <!-- All The required scripts -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
