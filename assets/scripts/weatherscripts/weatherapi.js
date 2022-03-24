@@ -1,4 +1,4 @@
-var iconurl = "http://openweathermap.org/img/w/";
+var iconurl = "https://openweathermap.org/img/wn/";
 var DateTime = luxon.DateTime;
 
 // function for dates
@@ -42,5 +42,5 @@ async function weatherForTheDay(geoLat, geoLon, travelDate) {
 };
 
 function getIconUrl(iconvalue){
-    return iconurl+iconvalue+'.png';
+    return iconurl+iconvalue+'@2x.png';
 }

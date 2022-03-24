@@ -1,3 +1,5 @@
+var weatherEl = document.querySelector("#weather");
+
 // Read Form data
 $("#form").on('click','.button', function(){
     var startCity = $('#startLocation').text();
@@ -9,7 +11,6 @@ $("#form").on('click','.button', function(){
     }else{
         $('#errorpan').text("");
     }
-    // console.log(startCity, endCity, travelDate); //2022-03-23
      getWeatherInformation(startCity, endCity, travelDate);
 });
 
@@ -36,6 +37,94 @@ async function getWeatherInformation(startCity, endCity, travelDate){
     var city = geoCoordinates[0].name;
     var state = geoCoordinates[0].state;
     updateAttractions(lon, lat);
+    var weatherInformationForGivendate = await weatherForTheDay(lat,lon, travelDate);
+    var temp = weatherInformationForGivendate.temp;
+    var minTemp = temp.min;
+    var maxTemp = temp.max;
+
+    var humidity = weatherInformationForGivendate.humidity;
+    var windSpeed = weatherInformationForGivendate.wind_speed;
+    var rainPercent = weatherInformationForGivendate.rain;
+    var weather = weatherInformationForGivendate.weather[0];
+    var mainWeather = weather.main;
+    var desc = weather.description;
+    var icon = getIconUrl(weather.icon);
+    var uvi = weatherInformationForGivendate.uvi;
+
+
+    // Below is everything that creates the weather forecast
+    var iconImage = $("<img src='" + icon + "'class='weather-icon' width='50' height='50'>");
+    
+    // creates a card to place the weather data
+    var weatherCard = document.createElement("div");
+    weatherCard.className = "card";
+    weatherEl.appendChild(weatherCard);
+    
+    // creates header to place city and date
+    var weatherNameAndDate = document.createElement("div");
+    weatherNameAndDate.className = "card-header is-flex is-justify-content-center is-size-3";
+    weatherNameAndDate.innerHTML = endCity + " " + travelDate;
+    weatherCard.appendChild(weatherNameAndDate);
+    
+    // create body to place content into
+    var weatherCont = document.createElement("div");
+    weatherCont.className = "is-flex is-justify-content-center card-cont";
+    weatherCard.appendChild(weatherCont);
+
+    // gets the min temperature and places it into the weather card
+    var weatherMin = document.createElement("div");
+    weatherMin.className = "temp is-size-4 column is-3 is-flex is-justify-content-center";
+    var roundedMinTemp = Math.ceil(minTemp);
+    weatherMin.innerHTML = "Min: " + roundedMinTemp + "&degF";
+    weatherCont.appendChild(weatherMin);
+    
+    // creates container to hold the icon, description, chance of rain, wind speed, and uvi
+    var centerWeatherInfo = document.createElement("div");
+    centerWeatherInfo.className = "center-weather column is-5";
+    weatherCont.appendChild(centerWeatherInfo);
+
+    // gets and places weather icon
+    var weatherIconHolder = document.createElement("div");
+    weatherIconHolder.className = "is-flex is-justify-content-center";
+    $(weatherIconHolder).append(iconImage);
+    centerWeatherInfo.appendChild(weatherIconHolder);
+    
+    // gets and places weather description
+    var weatherDesc = document.createElement("div");
+    weatherDesc.className = "is-size-4 is-flex is-justify-content-center";
+    weatherDesc.innerHTML = desc.toUpperCase();
+    centerWeatherInfo.appendChild(weatherDesc);
+
+    // gets and places chance of rain
+    var weatherRain = document.createElement("div");
+    weatherRain.className = "is-size-4 is-flex is-justify-content-center";
+    // if chance of rain is 0, data does not exist
+    if (!rainPercent) {
+        weatherRain.innerHTML = "Chance of Rain: 0 %"
+    }
+    else {
+        weatherRain.innerHTML = "Chance of Rain: " + rainPercent + " %";
+    }
+    centerWeatherInfo.appendChild(weatherRain);
+
+    // gets and places wind speed
+    var weatherWind = document.createElement("div");
+    weatherWind.className = "is-size-4 is-flex is-justify-content-center";
+    weatherWind.innerHTML = "Wind: " + windSpeed + " MPH";
+    centerWeatherInfo.appendChild(weatherWind);
+
+    // gets and places uvi
+    var weatherUvi = document.createElement("div");
+    weatherUvi.className = "is-size-4 is-flex is-justify-content-center";
+    weatherUvi.innerHTML = "UV Index: " + uvi;
+    centerWeatherInfo.appendChild(weatherUvi);
+
+    // gets and places max temperature
+    var weatherMax = document.createElement("div");
+    weatherMax.className = "temp is-size-4 column is-3 is-flex is-justify-content-center";
+    var roundedMaxTemp = Math.ceil(maxTemp);
+    weatherMax.innerHTML = "Max: " + roundedMaxTemp + "&degF";
+    weatherCont.appendChild(weatherMax);
 
     //calling weather API to get weather for a date
 }

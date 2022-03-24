@@ -3,6 +3,6 @@ var api = "https://api.opentripmap.com/0.1/en/places/radius?radius=17000&src_att
 async function getTourismPlaces(longitude, lattitude){
     var response = await fetch(api+'lon='+longitude+'&lat='+lattitude)
                         .then( (response) => {return response.json(); })
-                        .catch(err => console.err(err));
+                        .catch(err => console.error(err));
     return response;
 }
