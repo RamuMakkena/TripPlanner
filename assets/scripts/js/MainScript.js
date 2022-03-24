@@ -61,10 +61,9 @@ async function getWeatherInformation(endCity, travelDate){
     var icon = getIconUrl(weather.icon);
     var uvi = weatherInformationForGivendate.uvi;
 
-    
-    var iconImage = $("<img src='" + icon + "'class='weather-icon'>");
 
-
+    // Below is everything that creates the weather forecast
+    var iconImage = $("<img src='" + icon + "'class='weather-icon' width='50' height='50'>");
     
     // creates a card to place the weather data
     var weatherCard = document.createElement("div");
@@ -84,14 +83,14 @@ async function getWeatherInformation(endCity, travelDate){
 
     // gets the min temperature and places it into the weather card
     var weatherMin = document.createElement("div");
-    weatherMin.className = "temp is-size-4 column is-2 is-flex is-justify-content-center";
+    weatherMin.className = "temp is-size-4 column is-3 is-flex is-justify-content-center";
     var roundedMinTemp = Math.ceil(minTemp);
     weatherMin.innerHTML = "Min: " + roundedMinTemp + "&degF";
     weatherCont.appendChild(weatherMin);
     
     // creates container to hold the icon, description, chance of rain, wind speed, and uvi
     var centerWeatherInfo = document.createElement("div");
-    centerWeatherInfo.className = "column is-6 is-centered";
+    centerWeatherInfo.className = "center-weather column is-5";
     weatherCont.appendChild(centerWeatherInfo);
 
     // gets and places weather icon
@@ -121,7 +120,7 @@ async function getWeatherInformation(endCity, travelDate){
     // gets and places wind speed
     var weatherWind = document.createElement("div");
     weatherWind.className = "is-size-4 is-flex is-justify-content-center";
-    weatherWind.innerHTML = windSpeed + " MPH";
+    weatherWind.innerHTML = "Wind: " + windSpeed + " MPH";
     centerWeatherInfo.appendChild(weatherWind);
 
     // gets and places uvi
@@ -132,7 +131,7 @@ async function getWeatherInformation(endCity, travelDate){
 
     // gets and places max temperature
     var weatherMax = document.createElement("div");
-    weatherMax.className = "temp is-size-4 column is-2 is-flex is-justify-content-center";
+    weatherMax.className = "temp is-size-4 column is-3 is-flex is-justify-content-center";
     var roundedMaxTemp = Math.ceil(maxTemp);
     weatherMax.innerHTML = "Max: " + roundedMaxTemp + "&degF";
     weatherCont.appendChild(weatherMax);
