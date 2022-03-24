@@ -39,10 +39,7 @@ async function getWeatherInformation(endCity, travelDate){
 
 
 async function updateAttractions(longitutude, lattitude){
-    var lon=-96.7969;
-var lat=32.7763;
-console.log("before tourism");
-console.log(longitutude, lattitude);
+
 var response = await getTourismPlaces(longitutude, lattitude);
     var destinationFeatues = response.features;
     var filteredPlaces = [];
@@ -56,11 +53,13 @@ var response = await getTourismPlaces(longitutude, lattitude);
        }
        filteredPlaces.push(placeObject);
        var listElement = $('<li>').addClass('popularPlace');
-        listElement.html("<a href='https://en.wikipedia.org/wiki/"+wikiLinkID+"' alt='"+placeName+"'>"+placeName+"</a>");
+        listElement.html("<a href='https://www.wikidata.org/wiki/"+wikiLinkID+"' alt='"+placeName+"'>"+placeName+"</a>");
         placesList.append(listElement);
     }
 
-    $('#popularPlaces').append(placesList);
+   var h2Elemet = $("<h2 class='is-size-3 has-text-centered'>Popular places at destination</h2>");
+   $('#pipularPlaces').append(h2Elemet); 
+   $('#popularPlaces').append(placesList);
 
 
 }
