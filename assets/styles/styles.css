@@ -27,6 +27,10 @@
 }
 .previousTrip {
     color: brown;
-
-    
 }
+
+#map {
+    margin: 15px;
+    display: flex;
+    height: 444px
+  }

@@ -32,7 +32,7 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
       var duration = response.routes[0].legs[0].duration.text;
       var h3El = document.getElementById('summaryText');
      
-      h3El.textContent = 'Duration: '+duration+'  Distance: '+distance;
+      h3El.innerHTML = '<b>Duration:</b> '+duration+'  <b>Distance: </b>'+distance;
       directionsRenderer.setDirections(response);
     })
     .catch((e) => console.error("Directions request failed due to " + status));

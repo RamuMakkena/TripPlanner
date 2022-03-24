@@ -21,7 +21,6 @@ $("#form").on('click','.button', function(){
     var startCity = $('#startLocation').text();
     var endCity = $('#endingLocation').text();
     var travelDate = $('#traveldate').text();
-    console.log(travelDate);
     if(!startCity){
         $('#errorpan').text("");
         $('#errorpan').text("Starting Location should not be empty");
@@ -31,6 +30,7 @@ $("#form").on('click','.button', function(){
         $('#errorpan').text("Ending Location City should not be empty");
         return false;
     }else if(!travelDate){
+        $('#errorpan').text("");
         travelDate = (DateTime.now()).toFormat('yyyy-LL-dd');
     }
     else{
@@ -197,22 +197,20 @@ function updateLocalStorage(startCity, endCity){
 
 function updatePreviousTrips(tripsSearched){
     var previousTripsList = $("<ul>").addClass("previousTrips");
-    var h2Elemet = $('<h2>').text("Previous searched trips");
-    tripsSearched.forEach(trip => {
-        var tripElement = $('<li>').addClass('previousTrip');
-        tripElement.text(trip.startCity+" - "+trip.destinationCity);
-        previousTripsList.append(tripElement);
-    });
+    var h2Elemet = $("<h2 class='is-size-3 has-text-centered' >Previous searched trips</h2>");
+        //Displaying only latest 10 searches
+        for(var i=1; i<=10; i++){
+            if(i<= tripsSearched.length){
+                var trip = tripsSearched[tripsSearched.length-i]
+                var tripElement = $('<li>').addClass('previousTrip');
+                tripElement.text(trip.startCity+" - "+trip.destinationCity);
+                previousTripsList.append(tripElement);
+            }
+        }
+        
+    
     $('#previousTrips').html(""); //removing existing data;
     $('#previousTrips').append(h2Elemet); 
     $('#previousTrips').append(previousTripsList);
 }
 
-
-
-function getMinDate(){
-    return("2022-03-22");
-}
-function getMaxDate(){
-    return("2022-03-27");
-}
